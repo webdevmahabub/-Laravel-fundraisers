@@ -143,7 +143,7 @@
     </div>
 </section>
 
-{{-- ========================= CATEGORIES ========================= --}}
+{{-- ========================= CATEGORIES xk========================= --}}
 <section class="section section--tint" id="categories" aria-labelledby="categories-title">
     <div class="wrap">
         <div class="section__head">
