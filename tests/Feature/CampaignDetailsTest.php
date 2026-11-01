@@ -171,9 +171,9 @@ test('paused campaign hides the donation form', function () {
 
 test('fully funded campaign shows a funded state instead of the form', function () {
     $campaign = detailCampaign(['goal_amount' => 1000]);
-    $campaign->update(['raised_amount' => 1000]);
-    $fresh = $campaign->fresh();
-    throw new \Exception('DIAG goal=' . $fresh->goal_amount . ' raised=' . $fresh->raised_amount . ' stored=' . \Illuminate\Support\Facades\DB::table('campaigns')->find($campaign->id)->raised_amount);
+    // raised_amount is guarded — update it by key, as services do after verification.
+    \Illuminate\Support\Facades\DB::table('campaigns')->where('id', $campaign->id)->update(['raised_amount' => 1000]);
+    $campaign->refresh();
 
     $this->get(route('campaigns.show', $campaign->slug))
         ->assertOk()
